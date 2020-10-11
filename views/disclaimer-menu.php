@@ -11,6 +11,7 @@
 
 ?>
 
+<!-- Contenu du menu du plugin eu-disclaimer -->
 
 <h1>EU DISCLAIMER</h1>
 <br>

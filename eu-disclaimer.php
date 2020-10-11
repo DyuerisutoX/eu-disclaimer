@@ -31,6 +31,7 @@
   }
 
   //add_action est un hook pour réaliser l'action dans 'admin_menu' <- emplacement / ajouterAuMenu <- fonction à appeler / <- priorité.
+  //Va s'afficher sur le menu latéral sur la page admin
   add_action("admin_menu", "ajouterAuMenu", 10);
 
   // fonction à appeler lorsque l'on clic sur le menu.
@@ -42,7 +43,7 @@
   //Requiert le fichier DisclaimerGestionTable.php
   require_once ('Model/Repository/DisclaimerGestionTable.php');
 
-  //Si classe DisclaimerGestionTable exist
+  //Si la classe DisclaimerGestionTable exist
   if (class_exists("DisclaimerGestionTable"))
   {//Création d'un objet $gerer_table
     $gerer_table = new DisclaimerGestionTable();
@@ -71,7 +72,8 @@
     wp_enqueue_script('jQuery_modal');
 
     //Ajout du JS à l'activation du plugin
-    wp_register_script ('jQuery_eu', plugins_url('assets/js/eu-disclaimer.js', __FILE__), array('jquery'), '1.1', true);    //plugins_url récupère une URL dans le répertoire plugins ou mu-plugins.
+    //plugins_url récupère une URL dans le répertoire plugins ou multi-plugins.
+    wp_register_script ('jQuery_eu', plugins_url('assets/js/eu-disclaimer.js', __FILE__), array('jquery'), '1.1', true);    
     wp_enqueue_script('jQuery_eu');
 
     endif;
@@ -94,9 +96,6 @@
     //wp_enqueue_style mets en file d'attente une feuille de style CSS.
     wp_enqueue_style('modal');
 
-
-    
-    
     endif;
   }
 
@@ -111,9 +110,5 @@
   {
     echo DisclaimerGestionTable::AfficherDonneModal();
   }
-
-
-
-  
   
 ?>
