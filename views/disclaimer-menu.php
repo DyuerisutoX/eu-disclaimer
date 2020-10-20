@@ -1,5 +1,9 @@
 <?php
 
+        $tabinfo= DisclaimerGestionTable::recupDonnee();                   //recupere la fonction recupdonnee() pour placer les données en placeholder
+        $message_disclaimer = $tabinfo[0]["message_disclaimer"];           //affectation de variable 
+        $redirection_disclaimer = $tabinfo[0]["redirection_ko"];
+
     //S'assure que le formulaire ne soit pas vide lorsque l'on envoie les données
     if(!empty($_POST['message_disclaimer']) && !empty($_POST['url_redirection']))
     {
@@ -25,7 +29,7 @@
             <th scope="row"><label for="blogname">Message du disclaimer</label></th>
 
             <td>
-                <input name="message_disclaimer" type="text" id="message_disclaimer" value="Au regard de la loi européenne, vous devez nous confirmer que vous avez plus de 18 ans pour visiter ce site ?" class="regular-text" />
+                <input name="message_disclaimer" type="text" id="message_disclaimer" value="<?php echo $message_disclaimer; ?>" class="regular-text" />
             </td>
 
         </tr>
@@ -34,7 +38,7 @@
             <th scope="row"><label for="blogname">Url de redirection</label></th>
 
             <td>
-                <input name="url_redirection" type="text" id="url_redirection" value="https://www.google.com" class="regular-text" />
+                <input name="url_redirection" type="text" id="url_redirection" value="<?php echo $redirection_disclaimer; ?>" class="regular-text" />
             </td>
 
         </tr>

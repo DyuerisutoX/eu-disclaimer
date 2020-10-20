@@ -1,9 +1,10 @@
 <?php
     //définition du chemin d'accès à la classe DisclaimerOptions
     define( 'MY_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-    //Importer la classe DisclaimerOptions
+    //Importer la classe DisclaimerOptions qui se trouve dans notre fichier DisclaimerOptions.php
     include( MY_PLUGIN_PATH . '../Entity/DisclaimerOptions.php');
 
+    //Création de notre classe DisclaimerGestionTable et de ses fonctions
     class DisclaimerGestionTable
     {
         /**
@@ -89,6 +90,24 @@
             }
         }
 
+        function recupDonnee()
+        {
+            global $wpdb;
+            $table_disclaimer= $wpdb->prefix.'disclaimer_options';
+            $sql=$wpdb->prepare(
+                                    "
+                                    SELECT message_disclaimer,redirection_ko
+                                    FROM $table_disclaimer"
+                                );
+
+            $resultat = $wpdb->get_results($sql,ARRAY_A);
+             
+
+            return $resultat;
+
+
+        }
+
         /**
         * function AfficherDonneModal()
         * Affiche la fenetre modal
@@ -98,7 +117,7 @@
         function AfficherDonneModal()
         {
             global $wpdb;
-            $query = "SELECT * FROM vapo_disclaimer_options";       //Sélectionne depuis la table vapo_disclaimer_options
+            $query = "SELECT * FROM $wpdb->prefix"."disclaimer_options";       //Sélectionne depuis la table vapo_disclaimer_options
             $row = $wpdb->get_row($query);                          //Récupère une ligne de la base de données
             $message_disclaimer = $row->message_disclaimer;         //Stocke dans la variable $message_disclaimer la valeur de la colonne message_disclaimer de la bdd
             $lien_redirection = $row->redirection_ko;               //Stocke dans la variable $lien_redirection la valeur de la colonne redirection_ko de la bdd
